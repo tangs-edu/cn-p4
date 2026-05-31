@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>华文词语 | P4 Vocabulary Quiz</title>
+<title>华文词语 | Vocabulary Quiz</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -12,12 +12,9 @@
   --border: #e8e2d9;
   --text: #1a1410;
   --muted: #8a7e72;
-  --p4a: #7c5cbf;
-  --p4b: #2a9d8f;
   --shadow: rgba(50,35,15,0.10);
   --radius: 20px;
 }
-
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
@@ -29,285 +26,155 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px 20px;
+  padding: 40px 20px;
   position: relative;
   overflow-x: hidden;
 }
-
-/* Decorative background blobs */
 body::before {
-  content: '';
-  position: fixed;
-  top: -100px; right: -100px;
-  width: 420px; height: 420px;
-  background: radial-gradient(circle, rgba(124,92,191,0.10) 0%, transparent 70%);
-  pointer-events: none;
+  content:'';
+  position:fixed; top:-120px; right:-100px;
+  width:420px; height:420px;
+  background: radial-gradient(circle, rgba(124,92,191,0.09) 0%, transparent 70%);
+  pointer-events:none;
 }
 body::after {
-  content: '';
-  position: fixed;
-  bottom: -80px; left: -80px;
-  width: 360px; height: 360px;
-  background: radial-gradient(circle, rgba(42,157,143,0.10) 0%, transparent 70%);
-  pointer-events: none;
+  content:'';
+  position:fixed; bottom:-80px; left:-80px;
+  width:360px; height:360px;
+  background: radial-gradient(circle, rgba(42,157,143,0.09) 0%, transparent 70%);
+  pointer-events:none;
 }
 
 .wrapper {
-  width: 100%;
-  max-width: 560px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  animation: fadeUp 0.6s ease both;
+  width:100%; max-width:640px;
+  display:flex; flex-direction:column; align-items:center;
+  animation: fadeUp 0.55s ease both;
+  z-index:1;
 }
-
 @keyframes fadeUp {
-  from { opacity:0; transform:translateY(20px); }
+  from { opacity:0; transform:translateY(18px); }
   to   { opacity:1; transform:translateY(0); }
 }
 
 /* Header */
-.header {
-  text-align: center;
-  margin-bottom: 36px;
-}
-
+.header { text-align:center; margin-bottom:36px; }
 .badge {
-  display: inline-block;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  padding: 5px 16px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--muted);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 20px;
+  display:inline-block;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:30px; padding:5px 16px;
+  font-size:11px; font-weight:600; color:var(--muted);
+  letter-spacing:1px; text-transform:uppercase; margin-bottom:20px;
 }
-
 .title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 52px;
-  line-height: 1.05;
-  color: var(--text);
-  margin-bottom: 10px;
+  font-family:'DM Serif Display', serif;
+  font-size:52px; line-height:1.05; color:var(--text); margin-bottom:10px;
 }
-.title .zh {
-  font-family: 'Noto Serif SC', serif;
-  display: block;
-}
-.title .en {
-  display: block;
-  font-size: 28px;
-  font-style: italic;
-  color: var(--muted);
-}
+.title .zh { font-family:'Noto Serif SC', serif; display:block; }
+.title .en { display:block; font-size:28px; font-style:italic; color:var(--muted); }
+.subtitle { font-size:14px; color:var(--muted); font-weight:300; margin-top:8px; }
 
-.subtitle {
-  font-size: 14px;
-  color: var(--muted);
-  font-weight: 300;
-  margin-top: 8px;
-  line-height: 1.6;
-}
-
-/* Divider */
-.divider {
-  width: 100%;
-  border: none;
-  border-top: 1px solid var(--border);
-  margin-bottom: 28px;
-}
-
+.divider { width:100%; border:none; border-top:1px solid var(--border); margin-bottom:24px; }
 .section-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 14px;
-  text-align: center;
+  font-size:10px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase;
+  color:var(--muted); margin-bottom:14px; text-align:center;
 }
 
-/* Book cards */
-.books {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  width: 100%;
-  margin-bottom: 28px;
+/* Book grid */
+.books-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap:16px;
+  width:100%;
+  margin-bottom:28px;
 }
 
+/* Book card */
 .book-card {
-  background: var(--card);
-  border: 2px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px 20px 24px;
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-  cursor: pointer;
+  background:var(--card);
+  border:2px solid var(--border);
+  border-radius:var(--radius);
+  padding:26px 18px 22px;
+  text-decoration:none; color:inherit;
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  position:relative; overflow:hidden;
+  transition:transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  cursor:pointer;
+  animation: fadeUp 0.55s ease both;
 }
-
 .book-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  border-radius: var(--radius) var(--radius) 0 0;
-  transition: height 0.22s ease;
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:4px; border-radius:var(--radius) var(--radius) 0 0;
+  background: var(--accent);
 }
-
-.book-card.p4a::before { background: var(--p4a); }
-.book-card.p4b::before { background: var(--p4b); }
-
 .book-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 36px var(--shadow);
+  transform:translateY(-4px);
+  box-shadow:0 12px 36px var(--shadow);
+  border-color: var(--accent);
 }
-.book-card.p4a:hover { border-color: var(--p4a); }
-.book-card.p4b:hover { border-color: var(--p4b); }
-
-.book-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 10px;
-  margin-bottom: 16px;
+.book-sem-label {
+  font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  padding:3px 10px; border-radius:10px; margin-bottom:14px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
 }
-.p4a .book-label { background: rgba(124,92,191,0.10); color: var(--p4a); }
-.p4b .book-label { background: rgba(42,157,143,0.10); color: var(--p4b); }
-
 .book-number {
-  font-family: 'DM Serif Display', serif;
-  font-size: 56px;
-  line-height: 1;
-  margin-bottom: 4px;
+  font-family:'DM Serif Display', serif;
+  font-size:52px; line-height:1; margin-bottom:4px;
+  color: var(--accent);
 }
-.p4a .book-number { color: var(--p4a); }
-.p4b .book-number { color: var(--p4b); }
-
 .book-zh {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 4px;
+  font-family:'Noto Serif SC', serif;
+  font-size:12px; font-weight:600; color:var(--text); margin-bottom:4px;
 }
-
-.book-en {
-  font-size: 11px;
-  color: var(--muted);
-  font-weight: 400;
-  margin-bottom: 16px;
-  line-height: 1.4;
-}
-
+.book-en { font-size:11px; color:var(--muted); margin-bottom:14px; line-height:1.5; }
 .book-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 100%;
+  display:flex; flex-direction:column; gap:4px; width:100%; margin-bottom:14px;
 }
-
 .book-stat {
-  background: var(--bg);
-  border-radius: 8px;
-  padding: 5px 8px;
-  font-size: 11px;
-  color: var(--muted);
-  font-weight: 500;
+  background:var(--bg); border-radius:8px; padding:4px 8px;
+  font-size:11px; color:var(--muted); font-weight:500;
 }
-
 .book-cta {
-  margin-top: 16px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  font-size:12px; font-weight:700; letter-spacing:0.5px;
+  display:flex; align-items:center; gap:5px;
+  color: var(--accent);
 }
-.p4a .book-cta { color: var(--p4a); }
-.p4b .book-cta { color: var(--p4b); }
+.cta-arrow { transition:transform 0.2s; }
+.book-card:hover .cta-arrow { transform:translateX(4px); }
 
-.cta-arrow {
-  transition: transform 0.2s;
-}
-.book-card:hover .cta-arrow {
-  transform: translateX(4px);
-}
-
-/* Features */
+/* Features box */
 .features {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  width: 100%;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:18px 20px; width:100%;
 }
-
 .features-title {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 12px;
+  font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--muted); margin-bottom:12px;
 }
-
-.feature-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
+.feature-list { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
 .feature-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--text);
-  font-weight: 500;
+  display:flex; align-items:center; gap:8px;
+  font-size:12px; color:var(--text); font-weight:500;
 }
+.feature-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
 
-.feature-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background: var(--p4a);
-}
-.feature-item:nth-child(2n) .feature-dot { background: var(--p4b); }
-.feature-item:nth-child(3) .feature-dot { background: #c0392b; }
-.feature-item:nth-child(4) .feature-dot { background: #d4a017; }
-
-/* Footer */
 .footer {
-  margin-top: 28px;
-  font-size: 11px;
-  color: var(--muted);
-  text-align: center;
-  line-height: 1.6;
+  margin-top:24px; font-size:11px; color:var(--muted); text-align:center;
 }
 
-/* Mobile */
-@media (max-width: 420px) {
-  .title { font-size: 40px; }
-  .title .en { font-size: 22px; }
-  .books { grid-template-columns: 1fr; gap: 12px; }
-  .book-number { font-size: 44px; }
-  .feature-list { grid-template-columns: 1fr; }
+/* Loading / error states */
+.state-msg {
+  text-align:center; color:var(--muted); font-size:13px; padding:40px 0;
+}
+
+@media(max-width:480px) {
+  .title { font-size:38px; }
+  .title .en { font-size:22px; }
+  .books-grid { grid-template-columns:1fr 1fr; }
+  .feature-list { grid-template-columns:1fr; }
+}
+@media(max-width:340px) {
+  .books-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -315,7 +182,7 @@ body::after {
 <div class="wrapper">
 
   <div class="header">
-    <div class="badge">欢乐伙伴 · Primary 4</div>
+    <div class="badge">欢乐伙伴 · 小学华文</div>
     <h1 class="title">
       <span class="zh">华文词语</span>
       <span class="en">Vocabulary Quiz</span>
@@ -324,59 +191,92 @@ body::after {
   </div>
 
   <hr class="divider">
-
   <p class="section-label">Choose your book</p>
 
-  <div class="books">
-
-    <a class="book-card p4a" href="p4a.html">
-      <span class="book-label">Semester 1</span>
-      <div class="book-number">4A</div>
-      <div class="book-zh">四年级上册</div>
-      <div class="book-en">9 lessons<br>101 vocabulary words</div>
-      <div class="book-meta">
-        <div class="book-stat">L1 – L9</div>
-        <div class="book-stat">一起看电视 → 爱心无障碍</div>
-      </div>
-      <div class="book-cta">
-        Start Quiz
-        <svg class="cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </a>
-
-    <a class="book-card p4b" href="p4b.html">
-      <span class="book-label">Semester 2</span>
-      <div class="book-number">4B</div>
-      <div class="book-zh">四年级下册</div>
-      <div class="book-en">7 lessons<br>105 vocabulary words</div>
-      <div class="book-meta">
-        <div class="book-stat">L10 – L16</div>
-        <div class="book-stat">这样才对 → 动物世界</div>
-      </div>
-      <div class="book-cta">
-        Start Quiz
-        <svg class="cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </a>
-
+  <div class="books-grid" id="books-grid">
+    <div class="state-msg">Loading books...</div>
   </div>
 
   <div class="features">
-    <div class="features-title">What's included in each quiz</div>
+    <div class="features-title">What's included in every quiz</div>
     <div class="feature-list">
-      <div class="feature-item"><div class="feature-dot"></div>Multiple Choice: Pinyin</div>
-      <div class="feature-item"><div class="feature-dot"></div>Multiple Choice: Meaning</div>
-      <div class="feature-item"><div class="feature-dot"></div>25 or 50 questions</div>
-      <div class="feature-item"><div class="feature-dot"></div>Filter by lesson</div>
-      <div class="feature-item"><div class="feature-dot"></div>Sound feedback</div>
-      <div class="feature-item"><div class="feature-dot"></div>History tracking</div>
+      <div class="feature-item"><div class="feature-dot" style="background:#7c5cbf"></div>Multiple Choice: Pinyin</div>
+      <div class="feature-item"><div class="feature-dot" style="background:#2a9d8f"></div>Multiple Choice: Meaning</div>
+      <div class="feature-item"><div class="feature-dot" style="background:#c0392b"></div>25 or 50 questions</div>
+      <div class="feature-item"><div class="feature-dot" style="background:#d4a017"></div>Filter by lesson</div>
+      <div class="feature-item"><div class="feature-dot" style="background:#2980b9"></div>Sound feedback</div>
+      <div class="feature-item"><div class="feature-dot" style="background:#27ae60"></div>History tracking</div>
     </div>
   </div>
 
-  <div class="footer">
-    小学华文 · 欢乐伙伴 · Primary 4 · Singapore
-  </div>
-
+  <div class="footer">小学华文 · 欢乐伙伴 · Singapore</div>
 </div>
+
+<script>
+async function loadBooks() {
+  const grid = document.getElementById('books-grid');
+  try {
+    const res = await fetch('books.json');
+    if (!res.ok) throw new Error('Failed to load');
+    const books = await res.json();
+    renderBooks(books);
+  } catch(e) {
+    grid.innerHTML = '<div class="state-msg">Could not load book list.<br>Make sure books.json is in the same folder.</div>';
+  }
+}
+
+function renderBooks(books) {
+  const grid = document.getElementById('books-grid');
+  grid.innerHTML = '';
+
+  // Group by level for section headers
+  const levels = {};
+  books.forEach(b => {
+    if (!levels[b.level]) levels[b.level] = [];
+    levels[b.level].push(b);
+  });
+
+  // If only one level or all same, don't show group headers — just render flat
+  const multiLevel = Object.keys(levels).length > 1;
+
+  if (multiLevel) {
+    // Render grouped by level
+    Object.entries(levels).forEach(([level, group]) => {
+      const header = document.createElement('div');
+      header.style.cssText = 'grid-column:1/-1; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); padding-top:8px;';
+      header.textContent = level;
+      grid.appendChild(header);
+      group.forEach((b, i) => grid.appendChild(makeCard(b, i)));
+    });
+  } else {
+    books.forEach((b, i) => grid.appendChild(makeCard(b, i)));
+  }
+}
+
+function makeCard(b, i) {
+  const card = document.createElement('a');
+  card.href = b.file;
+  card.className = 'book-card';
+  card.style.cssText = `--accent:${b.color}; animation-delay:${i * 0.07}s`;
+
+  card.innerHTML = `
+    <span class="book-sem-label">${b.semester}</span>
+    <div class="book-number">${b.book}</div>
+    <div class="book-zh">${b.zh}</div>
+    <div class="book-en">${b.lesson_count} lessons · ${b.word_count} words</div>
+    <div class="book-meta">
+      <div class="book-stat">${b.lessons}</div>
+      <div class="book-stat">${b.lesson_range}</div>
+    </div>
+    <div class="book-cta">
+      Start Quiz
+      <svg class="cta-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  `;
+  return card;
+}
+
+loadBooks();
+</script>
 </body>
 </html>

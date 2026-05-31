@@ -1,0 +1,41 @@
+[
+  {
+    "id": "p3b",
+    "file": "p3b.html",
+    "level": "Primary 3",
+    "semester": "Semester 2",
+    "book": "3B",
+    "zh": "三年级下册",
+    "lessons": "L10 – L17",
+    "lesson_range": "我住的地方 → 好孩子",
+    "lesson_count": 8,
+    "word_count": 99,
+    "color": "#e07b39"
+  },
+  {
+    "id": "p4a",
+    "file": "p4a.html",
+    "level": "Primary 4",
+    "semester": "Semester 1",
+    "book": "4A",
+    "zh": "四年级上册",
+    "lessons": "L1 – L9",
+    "lesson_range": "一起看电视 → 爱心无障碍",
+    "lesson_count": 9,
+    "word_count": 101,
+    "color": "#7c5cbf"
+  },
+  {
+    "id": "p4b",
+    "file": "p4b.html",
+    "level": "Primary 4",
+    "semester": "Semester 2",
+    "book": "4B",
+    "zh": "四年级下册",
+    "lessons": "L10 – L16",
+    "lesson_range": "这样才对 → 动物世界",
+    "lesson_count": 7,
+    "word_count": 105,
+    "color": "#2a9d8f"
+  }
+]
